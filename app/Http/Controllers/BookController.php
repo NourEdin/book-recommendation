@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\ReadingInterval;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -15,6 +16,19 @@ class BookController extends Controller
     {
         return Book::all();
     }
+
+    /**
+     * Display the most recommended books
+     */
+    public function recommended() 
+    {
+        
+        $result = Book::getMostRecommended(5);
+        
+        return response()->json($result);
+
+    }
+
 
     /**
      * Add a book interval for the authenticated user

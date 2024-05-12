@@ -9,6 +9,8 @@ Route::get('/', function () {
 
 //Assignment endpoints
 Route::get('/books', [BookController::class, 'index']);
+Route::get('/books/recommended', [BookController::class, 'recommended']);
+
 Route::post('/interval', [BookController::class, 'addInterval'])->middleware('auth');
 
 //Authentication endpoints
