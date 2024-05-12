@@ -7,6 +7,9 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
+//Assignment endpoints
 Route::get('/books', [BookController::class, 'index']);
+Route::post('/interval', [BookController::class, 'addInterval'])->middleware('auth');
 
+//Authentication endpoints
 require __DIR__.'/auth.php';
