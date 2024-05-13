@@ -69,14 +69,19 @@ class BookController extends Controller
                 $url = env("SMS_API_DEV");
             }
 
-            $response = Http::post($url, [
-                'phone' => $user->phone,
-                'message' => $message,
-            ]);
-
-            if (!$response->successful()) {
-                $logger->error('Could not send an SMS', ['user' => $user, 'url' => $url, 'response' => $response]);
+            try {
+                $response = Http::post($url, [
+                    'phone' => $user->phone,
+                    'message' => $message,
+                ]);
+    
+                if (!$response->successful()) {
+                    $logger->error('Could not send an SMS', ['user' => $user, 'url' => $url, 'response' => $response]);
+                }
+            } catch (\Exception $e) {
+                $logger->error("Exception while trying to send an SMS", ['error' => $e->getMessage()]);
             }
+            
         }
         
 
