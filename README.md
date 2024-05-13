@@ -21,4 +21,7 @@ docker run --rm \
 6. Head to `http://localhost` to make sure the app is up and running. You should see the laravel version returned as JSON.
 
 ## API Reference
-You can find the API reference [on Postman](https://documenter.getpostman.com/view/2338062/2sA3JNbgBu).
+You can find the API documentation [on Postman](https://documenter.getpostman.com/view/2338062/2sA3JNbgBu). 
+
+## Postman JSON Collection
+You can all import the API Postman collection to test the API locally. Find the collection JSON in [the docs folder](./docs/Book%20Recommendation%20API.postman_collection.json)

@@ -1,0 +1,825 @@
+{
+	"info": {
+		"_postman_id": "8621a567-a4eb-4e8f-a9d0-a4799d5f3d52",
+		"name": "Book Recommendation API",
+		"description": "# Introduction\n\nThis API demonstrates a simple web app of a book recommendation function. The web app provides endpoints for registration and authentication, besids the endpoints of book listing, reading, and recommendation.\n\n# CSRF Checks\n\nEndpoints passes through a CSRF check, therefore, you need to hit the [CSRF Endpoint](https://go.postman.co/workspace/c9d9acd9-d27f-4d2b-9cee-7ac751ae3b59/documentation/2338062-8621a567-a4eb-4e8f-a9d0-a4799d5f3d52?entity=request-be11eb9b-e700-4dfd-b2d0-80805bf7c5f4) one time before using other endpoints. You'll get an error otherwise.\n\n# Public vs User-only endpoints\n\nAll endpoints are publicly accessible, except for `Add Interval` and `logout`. When you want to access an authenticated endpoint, you need to login using the `Login` endpoint.\n\n## **Necessary Headrs**\n\nThese headers are automatically added, I list him just for your interest.\n\n| Header | Description |\n| --- | --- |\n| `X-XSRF-TOKEN` | The CSRF token generated in the [CSRF Endpoint](https://go.postman.co/workspace/c9d9acd9-d27f-4d2b-9cee-7ac751ae3b59/documentation/2338062-8621a567-a4eb-4e8f-a9d0-a4799d5f3d52?entity=request-be11eb9b-e700-4dfd-b2d0-80805bf7c5f4). This header is used in all requests. |\n| `Accept: application/json` | Making sure the response is returned in JSON format. Especially useful in case of errors. |",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2338062"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test User",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test2@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "my+password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "my+password",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "+1234567",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						},
+						"description": "Creates a new user in the database. Before you hit this, please make sure to request a CSRF token using the [CSRF Endpoint.](https://go.postman.co/workspace/c9d9acd9-d27f-4d2b-9cee-7ac751ae3b59/documentation/2338062-8621a567-a4eb-4e8f-a9d0-a4799d5f3d52?entity=request-be11eb9b-e700-4dfd-b2d0-80805bf7c5f4)"
+					},
+					"response": [
+						{
+							"name": "Missing CSRF Header",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Test User",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "my+password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "my+password",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "+1234567",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "unknown status",
+							"code": 419,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "34.136.98.110"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.6"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 10:34:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel_session=eyJpdiI6IkM0VUFVSzh5VEJOSWs3RDhtV2J0cWc9PSIsInZhbHVlIjoiVzhXU2pGQXFyaFIwNzdFVExWRG1VYm1uQ0lEOGJjZkpWS0VMbnEvcitOS2ZRZGhYOVVoOXh4QWxnTmY0cDd0cUhmbVRxVUtNZ0MwbnhYQ2dmeFY2NWh4RUR6alpKcXdaSmdlSTQrRjFsMGxHVmkwN085VlNzcStrbEowQll2SmciLCJtYWMiOiJmNmQ0MzUwYzBhZjBkY2E1NGRmNTRhYmI0M2YzODkwYjFkMDMxNThjNGIwZWI3NTJmNzc0ZmFmNTYzZjE4N2VlIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:34:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"CSRF token mismatch.\",\n    \"exception\": \"Symfony\\\\Component\\\\HttpKernel\\\\Exception\\\\HttpException\"\n}"
+						},
+						{
+							"name": "User already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Test User",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "my+password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "my+password",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "+1234567",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "34.136.98.110"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.6"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 10:36:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6InVKUDFNR3N3TDNNcUdCa0hVNll5NGc9PSIsInZhbHVlIjoiR0FyeExLM09XbFpHa2p2TDIxdGpzdmJLaENUK0xmK3hUbEpyR0x6TUdPY0dCZjVLbGR3UzhFcnVFOVF6ZndtSWo1TkhNRWVtNFJzenBpaUtnZ2pPaTdlL0dLenphbm9jWThPeWQ3SzN3WEU4OURLckpSQyswcWtOUk9BL2Q4T3EiLCJtYWMiOiJlZjU5ODc5YWM1MjhmNjA1MmM4NjRkOTI3YzM2MGQ3ZDQwYWZkYjA5ODQ1MzA2NmFjNmUzYTUwMjA2YmQ5MDhhIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:36:08 GMT; Max-Age=7200; path=/; samesite=lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel_session=eyJpdiI6Im5sUWt5TTZ2L081UUEvSk5uV2NZb2c9PSIsInZhbHVlIjoiVTJzdUdYb0NLSzAwTHBKY0JmRVBOYXlxZmx3Y29tcHNTeVJFbHR1ckx3SHl4ekJSTGZ3dytCVFpEQ1FMWUY0aGpRQmNqaDJSc3pkM0NWdUd6RGs2UDlWeGRWb1E2QThrN2UvYmRGWlBzQ1U1NzNta0o1N1FhMUx2UjFVTmVVdG8iLCJtYWMiOiIyZTMwN2Y3YzdlYWVhZGFmODFiZmM0YjhhNzFkMGJmYjM2OTVhNmRlYmM0YzFiYjk2NzA2N2U5MDBjOGY1NzYzIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:36:08 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The email has already been taken.\",\n    \"errors\": {\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "User Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Test User",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test1@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "my+password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "my+password",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "+1234567",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Host",
+									"value": "34.136.98.110"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.6"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 10:36:36 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6IlJqMnVTZGRMVUJBYm1WOG5UazRaT1E9PSIsInZhbHVlIjoia2s2anJjTnFCVmZNanZFY3ZpSWRzUUtEN1NTVjlWaWdEOWFOTUlzWGZtamNGbUtaLy8rZ0tMejgrYXdld0dEL0FZcFpSY3FQYXc5ZUxIOVZMWWVXSkRhYWxXNFpmbGkyNy9QdFcxdEdBUHYwU2liazQrSzhCTmQ3WlRKM21uSk0iLCJtYWMiOiIxYjc4NGUxNzdlMTU0MzEwY2UyMzZlMGZjOGQ5YTAwNGQ5MGIyZWE2NzRhZTBhZjY1MmU3OTI5YmQ0MmYxZmM4IiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:36:36 GMT; Max-Age=7200; path=/; samesite=lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel_session=eyJpdiI6IjR6SWNpVFo3R2pJMVhMTWZrakZBblE9PSIsInZhbHVlIjoiaUgrT1hBRTJDMndJeFFtVmFZb1ZJZUt1U25CREpZTVBKbldxcDA0NTZBSUsyTGxPZnJzQ3dnUTA2WlE3c1hDMnFQYkRuUzZ2TG5xYkhaTU4wUlMzZEFKVVJ5d0haY3ZaVDVrV3hvT0YxMFpITGZSVnpQbU11TTQ0eis3aEtaMGQiLCJtYWMiOiJmN2EwOWU4NTQ1MTlhYjM3ZTdjNzNmMmZkOGY5NDkxYWVjNWU4M2I3NTdiNjU0YWQ3YWEzNGQwZDQxM2JkZjRhIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:36:36 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test2@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "my+password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "Signs the user in the app and saves a cookie for authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "CSRF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cookieToken = pm.cookies.get('XSRF-TOKEN');\r",
+									"pm.collectionVariables.set('xsrf-token', cookieToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/sanctum/csrf-cookie",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sanctum",
+								"csrf-cookie"
+							]
+						},
+						"description": "Requests a CSRF token which is set as a cookie and saved in a variable and a global header.\n\nThe endpoint doesn't need any parameters."
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"logout"
+							]
+						},
+						"description": "Deletes the user's session."
+					},
+					"response": []
+				}
+			],
+			"description": "API Endpoints related to user registration and authentication"
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						},
+						"description": "Lists all books in the app. These are normally randomely generated using a database seeder."
+					},
+					"response": [
+						{
+							"name": "Sample Book Listing",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/books",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"books"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "34.136.98.110"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.6"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 10:33:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6Ijg5aE5ERUVCbW1wUlVtelpKR3h0c1E9PSIsInZhbHVlIjoiQ1JlbFhxdFA2bjQzTVFaUHltMUd5cng2RWtIdUNwWjV0aWtWQzhGTVZtRWgycXdVWkhmUFdUakVBZU92MXF1bHVnRGZpZDNJbmlkQWE5emNPSjlQVlpmbGhQVitXVHBNekhIL1RCTkNBc0RPOUVnZndMUHRNWDJLaHFCZkorUDEiLCJtYWMiOiI3OWY4YzhjZjFmYzZkMzI2Yjk2MTk2YjgwNzA5YWNiMWFhOTAxOWZjOWJiODVmYmFkOTE3ZGU2NjE1MjY4MGUwIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:33:58 GMT; Max-Age=7200; path=/; samesite=lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel_session=eyJpdiI6ImN4T09aaW5GNnoyUTU4QXdIMXcxTEE9PSIsInZhbHVlIjoiclhLREhHUWRjL3pocWRMMjJSSlVVVTg3Wno3Z2N4VW1WbTR1OWFjdnVCdXNmQVhlblJ6UEIvaGpCNUlhZWdXZU9BS0phanFrRkx4Qm92aXhVeWlIUytnckpJaW9EY2NtVTBSd0l6cnNCcGM4bTVUcmdDL2lYbFdjU1BFWTN3MWUiLCJtYWMiOiJkNGViOWE3ODllYjJkZmRjNWZjZTQyNDI3Y2QyMzBkMWI4MTZjZGI2NzMxMmJhMmIzZWM5ZWI1MWRmNGJiMDFhIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:33:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Persevering radical analyzer\",\n        \"pages\": 42\n    },\n    {\n        \"id\": 2,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Synergized user-facing processimprovement\",\n        \"pages\": 136\n    },\n    {\n        \"id\": 3,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"User-friendly 3rdgeneration moderator\",\n        \"pages\": 283\n    },\n    {\n        \"id\": 4,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Enterprise-wide clear-thinking workforce\",\n        \"pages\": 409\n    },\n    {\n        \"id\": 5,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Multi-channelled intermediate functionalities\",\n        \"pages\": 109\n    },\n    {\n        \"id\": 6,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Customer-focused dynamic groupware\",\n        \"pages\": 49\n    },\n    {\n        \"id\": 7,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Phased logistical hardware\",\n        \"pages\": 304\n    },\n    {\n        \"id\": 8,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Compatible motivating application\",\n        \"pages\": 360\n    },\n    {\n        \"id\": 9,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Grass-roots high-level definition\",\n        \"pages\": 354\n    },\n    {\n        \"id\": 10,\n        \"created_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"updated_at\": \"2024-05-13T09:49:04.000000Z\",\n        \"name\": \"Networked multimedia software\",\n        \"pages\": 180\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Add Interval",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "book_id",
+									"value": "9",
+									"description": "Find all book id's in /books listing endpoint",
+									"type": "text"
+								},
+								{
+									"key": "start_page",
+									"value": "15",
+									"description": "Must be greater than and less than the book pages count.",
+									"type": "text"
+								},
+								{
+									"key": "end_page",
+									"value": "40",
+									"description": "Must be greater than start_page and less than the book pages count.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/interval",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"interval"
+							]
+						},
+						"description": "A logged-in user can add a reading interval which is used later in sorting books for recommendation."
+					},
+					"response": [
+						{
+							"name": "Sample Interval response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "book_id",
+											"value": "9",
+											"description": "Find all book id's in /books listing endpoint",
+											"type": "text"
+										},
+										{
+											"key": "start_page",
+											"value": "15",
+											"description": "Must be greater than and less than the book pages count.",
+											"type": "text"
+										},
+										{
+											"key": "end_page",
+											"value": "40",
+											"description": "Must be greater than start_page and less than the book pages count.",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/interval",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"interval"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "34.136.98.110"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.6"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 10:33:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6IlZGdW12UEViWmpKQW1GeU9KNnZnYVE9PSIsInZhbHVlIjoiZzYySTV6NElRQWdGdDFEYjVFSzZJQnYzN3oyamVmQmh3dUtVZGt0dHdNOE0wdlE1R1NjYi82VzE1NkxaNjZid2Zib1hOa0lyK3NPaEw4Ymc4ODUwdkNQU094Ym1ZbFV2ZEFxNDBQQzRCMjNvaGVKYVVoMjB2Q1lHdDhpOUZLYWQiLCJtYWMiOiJkODg2ZmQ2NjI3OTQ4Njk4ZjFjNTdmZWZiYmYwODg3NjhlZTkwYjFjOWUxN2QyYmIzMDhmMjg1NjBhMGNjOGNhIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:33:34 GMT; Max-Age=7200; path=/; samesite=lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel_session=eyJpdiI6ImkwVEJsdlA2UkQ0aXNVbmtrSWxZZVE9PSIsInZhbHVlIjoiYlc5WXl6VDNQN2l4Nk1iaWRFTFdLdkloY2RTcXBoUFBnT1JNdVFjOVlkRll1MlkwTTU4RWVRWUQyS0wzWnU0NjdsWUczM2Rmb0tPK0pBZXpVaHF3WjNyb0tSd1FEY01JczZZdTVBOGhBaFlVaXZYYjRoUndwQWRqWFFhajgzMGMiLCJtYWMiOiI0Yjg3NzJhZmFjZjFjYjQxOGNhYTA4NTJhY2QyYTljZTg2ZWJiOTI4NmJiNjc2MDFmOGQ3YmFlZWU1ZWYyNDNmIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 12:33:34 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"book_id\": \"9\",\n    \"user_id\": 4,\n    \"start_page\": \"15\",\n    \"end_page\": \"40\",\n    \"updated_at\": \"2024-05-13T10:33:34.000000Z\",\n    \"created_at\": \"2024-05-13T10:33:34.000000Z\",\n    \"id\": 13\n}"
+						}
+					]
+				},
+				{
+					"name": "Recommended List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/books/recommended",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"recommended"
+							]
+						},
+						"description": "Doesn't take any arguments. It shows a list of the 5 most recommended books based on number of pages read in each by all users."
+					},
+					"response": [
+						{
+							"name": "Random example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{baseUrl}}/books/recommended",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"books",
+										"recommended"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "34.136.98.110"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.6"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 09:56:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6IkM3TFhmNXVVaTFzQ2RnWk5hYWV2NFE9PSIsInZhbHVlIjoieEV4WFMwTEx6Qlh2WmF1V3JZeWc4SVdBNkc5WEhxZWlTY1JyemV6LytLRjdxeGl5YUdpbWh3dUt4Nm9TSXNZcERuQVpOaFJZNXhsQmEySTlWKzEwcko4NjhYQTZEdG5GYXE0clBFTWc4V0U4V0NTYXpwclhuRlN0MW1RdVJwVlEiLCJtYWMiOiIyMDE3YzcwZjg2ZWQxNWM4ZTNmNGI0YzZlOTExMjM1MzM2YjNiMmY3MjIyMTZiN2QxMjA4MGFkOTNiYjk3ODE2IiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 11:56:57 GMT; Max-Age=7200; path=/; samesite=lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel_session=eyJpdiI6IlRMRzhPampSRkl1Vk1KM3FjRDlyU3c9PSIsInZhbHVlIjoiOVNkeUNYdUhTdlg2M01LemZNbnE2Zm1uMjZaZTJwUFd4M0hxcU5SaDJxWDFCRkhGVUtGMkdZekw0aXN1SDc4SHJ6eGtyZlpXRFpVMXZ4TXVVcjZzcWQ2MEZHbk84aUNLOFNtNThkOVpYSEc5ZENPOS9BYjlXNlNPM01Vd1RYQXkiLCJtYWMiOiJkZjUwYzBhZjEwMDk3ODAyYzI4ZDEzZmY2YTlmMjBiY2ZhMTM2NWNlMmNmNTg5NjE5YTkxNGNmMjdmZDc4NDNkIiwidGFnIjoiIn0%3D; expires=Mon, 13 May 2024 11:56:57 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"book_id\": 3,\n        \"book_name\": \"User-friendly 3rdgeneration moderator\",\n        \"num_of_read_pages\": 180\n    },\n    {\n        \"book_id\": 4,\n        \"book_name\": \"Enterprise-wide clear-thinking workforce\",\n        \"num_of_read_pages\": 131\n    },\n    {\n        \"book_id\": 1,\n        \"book_name\": \"Persevering radical analyzer\",\n        \"num_of_read_pages\": 36\n    },\n    {\n        \"book_id\": 6,\n        \"book_name\": \"Customer-focused dynamic groupware\",\n        \"num_of_read_pages\": 36\n    },\n    {\n        \"book_id\": 9,\n        \"book_name\": \"Grass-roots high-level definition\",\n        \"num_of_read_pages\": 26\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "Endpoints requested by the client."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const xsrfToken = pm.collectionVariables.get(\"xsrf-token\");\r",
+					"//Add necessary headers to the API client\r",
+					"pm.request.headers.add({ key: 'X-XSRF-TOKEN', value: xsrfToken });\r",
+					"pm.request.headers.add({ key: 'Accept', value: 'application/json' });"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//Update the xsrf-token from cookies\r",
+					"const cookieToken = pm.cookies.get('XSRF-TOKEN');\r",
+					"if (typeof cookieToken !== 'undefined') {\r",
+					"    pm.collectionVariables.set('xsrf-token', cookieToken);\r",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost"
+		},
+		{
+			"key": "xsrf-token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
