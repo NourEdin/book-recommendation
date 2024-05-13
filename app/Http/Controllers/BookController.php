@@ -80,7 +80,7 @@ class BookController extends Controller
         }
         
 
-        return response()->json($interval);
+        return response()->json($interval, 201);
     }
 
 }
